@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование рецепта</title>
+</head>
+<body>
+
+<h2>Редактирование рецепта</h2>
+
+<form action="/recipe/update" method="post">
+    <input type="hidden" name="id" th:value="${recipe.id}">
+
+    <label for="name">Название рецепта:</label>
+    <input type="text" id="name" name="name" th:value="${recipe.name}" required>
+
+    <h3>Ингредиенты</h3>
+    <div th:each="ingredient : ${allIngredients}">
+        <input type="checkbox" th:name="selectedIngredientIds"
+               th:value="${ingredient.id}"
+               th:checked="${recipe.ingredients.contains(ingredient)}">
+        <label th:text="${ingredient.name}"></label>
+    </div>
+
+    <button type="submit">Сохранить изменения</button>
+</form>
+
+<a href="/recipe">Отмена</a>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список рецептов</title>
+</head>
+<body>
+
+<h2>Список рецептов</h2>
+
+<form action="/recipe/delete" method="post">
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Выбрать</th>
+            <th>ID</th>
+            <th>Название рецепта</th>
+            <th>Ингредиенты</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="recipe : ${recipes}">
+            <td><input type="radio" name="recipeId" th:value="${recipe.id}" required></td>
+            <td th:text="${recipe.id}"></td>
+            <td th:text="${recipe.name}"></td>
+            <td>
+                <ul>
+                    <li th:each="ingredient : ${recipe.ingredients}" th:text="${ingredient.name}"></li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button type="submit">Удалить выбранный рецепт</button>
+</form>
+
+<form action="/recipe/edit" method="get">
+    <input type="hidden" name="recipeId" id="selectedRecipeId">
+    <button type="submit">Изменить выбранный рецепт</button>
+</form>
+
+<a href="/recipe/new">Добавить новый рецепт</a>
+
+<script>
+    document.querySelectorAll('input[name="recipeId"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            document.getElementById('selectedRecipeId').value = this.value;
+        });
+    });
+</script>
+
+</body>
+</html>

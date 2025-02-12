@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Все ингредиенты</title>
+</head>
+<body>
+
+<h2>Все ингредиенты</h2>
+<ul>
+    <li th:each="ingredient : ${ingredients}" th:text="${ingredient.name}"></li>
+</ul>
+
+<a href="/ingredient/new">Добавить новый ингредиент</a>
+
+</body>
+</html>

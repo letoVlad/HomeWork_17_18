@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Все ингредиенты</title>
+</head>
+<body>
+
+<div th:each="ingredient : ${ingredientList}">
+    <a th:href="@{/ingredient/{id}(id=${ingredient.getId()})}" th:text="${ingredient.getName()}">ingr</a>
+</div>
+
+</body>
+</html>

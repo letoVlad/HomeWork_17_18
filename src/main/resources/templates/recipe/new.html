@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание рецепта</title>
+</head>
+<body>
+<h1>Создать рецепт</h1>
+<form th:action="@{/recipe/new}" th:object="${recipeForm}" method="post">
+    <div>
+        <label for="name">Название рецепта:</label>
+        <input type="text" id="name" th:field="*{name}" required />
+    </div>
+    <div>
+        <p>Выберите ингредиенты:</p>
+        <ul>
+            <li th:each="ingredient : ${allIngredients}">
+                <input type="checkbox"
+                       th:field="*{selectedIngredientIds}"
+                       th:value="${ingredient.id}" />
+                <span th:text="${ingredient.name}"></span>
+            </li>
+        </ul>
+    </div>
+    <button type="submit">Создать рецепт</button>
+</form>
+<a th:href="@{/recipe}">Отмена</a>
+</body>
+</html>
